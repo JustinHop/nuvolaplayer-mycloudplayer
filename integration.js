@@ -34,7 +34,7 @@
 		Nuvola.onMessageReceived = Nuvola.bind(this, this.messageHandler);
 		
 		/* For debug output */
-		this.name = "Happy Songs";
+		this.name = "My Cloud Player";
 		
 		/* Let's run */
 		this.state = Nuvola.STATE_NONE;
@@ -59,16 +59,35 @@
 		var album_art = null;
 		var song = null;
 		var artist = null;
-		var album = null;
+		var album = "Soundcloud Stream";
 		
 		
-		// Retrieve song details here
-		song = "Hello baby!";
-		artist = "Jiří Janoušek";
-		album = "Best of";
-		state = Nuvola.STATE_PLAYING;
-		can_thumbs_up = true;
-		can_thumbs_down = true;
+		/* Retrieve song details here
+			song = "Hello baby!"; artist = "Jiří Janoušek";
+			album = "Best of";
+			state = Nuvola.STATE_PLAYING;
+			can_thumbs_up = true;
+			can_thumbs_down = true; */
+		try{
+			album_art = document.getElementById("artwork").getElementsByClassName("active")[0].src;
+			song = document.getElementById("staticHeader").getElementsByTagName("h3")[0].textContent;
+			artist = document.getElementById("staticHeader").getElementsByTagName("h4")[0].textContent;
+			album = document.getElementsByClassName("albumTitle")[0].text;
+		}
+		catch(e){
+			console.debug("Unable to obtain song info: " + e.message);
+		}
+		
+		try{
+			if (document.getElementsByClassName("playtoggle")[0].classList.contains("pause")){
+				state = Nuvola.STATE_PLAYING;
+			} else if (document.getElementsByClassName("playtoggle")[0].classList.contains("play")) {
+				state = Nuvola.STATE_PAUSED;
+			}
+		}
+		catch(e){
+			console.debug("Unable to get state info: " + e.message);
+		}
 		
 		// Save state
 		this.state = state;
@@ -115,25 +134,26 @@
 			{
 			case Nuvola.ACTION_PLAY:
 				if (this.state != Nuvola.STATE_PLAYING)
-					alert("Play!");
+					Nuvola.clickOnElement(document.getElementsByClassName("playtoggle")[0]);
 				break;
 			case Nuvola.ACTION_PAUSE:
-				alert("Play!");
+				if (this.state != Nuvola.STATE_PAUSED)
+					Nuvola.clickOnElement(document.getElementsByClassName("playtoggle")[0]);
 				break;
 			case Nuvola.ACTION_TOGGLE_PLAY:
-				alert("Toggle!");
+				Nuvola.clickOnElement(document.getElementsByClassName("playtoggle")[0]);
 				break;
 			case Nuvola.ACTION_PREV_SONG:
-				alert("Previous song!");
+				Nuvola.clickOnElement(document.getElementById("html5player").getElementsByClassName("prev")[0]);
 				break;
 			case Nuvola.ACTION_NEXT_SONG:
-				alert("Next song!");
+				Nuvola.clickOnElement(document.getElementById("html5player").getElementsByClassName("next")[0]);
 				break;
 			case Nuvola.ACTION_THUMBS_UP:
-				alert("Thumbs up!");
+				Nuvola.clickOnElement(document.getElementById("html5player").getElementsByClassName("gfavorite")[0]);
 				break;
 			case Nuvola.ACTION_THUMBS_DOWN:
-				alert("Thumbs down!");
+				Nuvola.clickOnElement(document.getElementById("html5player").getElementsByClassName("gfavorite")[0]);
 				break;
 			default:
 				// Other commands are not supported
