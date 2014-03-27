@@ -72,7 +72,6 @@
 			album_art = document.getElementById("artwork").getElementsByClassName("active")[0].src;
 			song = document.getElementById("staticHeader").getElementsByTagName("h3")[0].textContent;
 			artist = document.getElementById("staticHeader").getElementsByTagName("h4")[0].textContent;
-			album = document.getElementsByClassName("albumTitle")[0].text;
 		}
 		catch(e){
 			console.debug("Unable to obtain song info: " + e.message);
