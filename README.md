@@ -18,4 +18,6 @@ sort of album title to add.
 Favorites don't work yet.
 
 
+<!--
 # vim: tw=79: formatoptions+=t: ft=markdown
+-->
