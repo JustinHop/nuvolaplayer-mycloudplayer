@@ -61,6 +61,14 @@
 		var artist = null;
 		var album = "Soundcloud Stream";
 		
+		try{
+			var ads=document.getElementsByClassName("adsbygoogle")[0];
+			ads.parentNode.removeChild(ads);
+			ads=document.getElementsByClassName("adGoogle")[0];
+			ads.parentNode.removeChild(ads);
+		} catch (e) {
+			//console.debug("Can't remove ad, maybe it's already gone? " + e.message);
+		}
 		
 		/* Retrieve song details here
 			song = "Hello baby!"; artist = "Jiří Janoušek";
