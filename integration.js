@@ -59,7 +59,7 @@
 		var album_art = null;
 		var song = null;
 		var artist = null;
-		var album = "Soundcloud Stream";
+		var album = null;
 		
 		try{
 			var ads=document.getElementsByClassName("adsbygoogle")[0];
